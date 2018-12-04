@@ -1,0 +1,57 @@
+\BOOKMARK [1][-]{section.1}{Chapter 0: Administrative}{}% 1
+\BOOKMARK [2][-]{subsection.1.1}{First class is January 8, 2019 from 10:30AM to 12 noon in Baxter 128.}{section.1}% 2
+\BOOKMARK [2][-]{subsection.1.2}{Professor is Kenneth Winston \(kwinston@caltech.edu\). My office is 236 Baxter. I am there after every class, and lots of other times. Email if you can't find me and want to set up a meeting.}{section.1}% 3
+\BOOKMARK [2][-]{subsection.1.3}{This is the ninth year I have taught this class. This Jupyter notebook is the textbook.}{section.1}% 4
+\BOOKMARK [2][-]{subsection.1.4}{I generally post the next week's lectures on Sunday nights.}{section.1}% 5
+\BOOKMARK [2][-]{subsection.1.5}{This class requires a fair amount of time. You should plan to spend at least nine hours a week on the class between lectures, homework, tests, and general studying.}{section.1}% 6
+\BOOKMARK [1][-]{section.2}{0.1 Components of the class}{}% 7
+\BOOKMARK [2][-]{subsection.2.1}{0.1.1 Class attendance and participation}{section.2}% 8
+\BOOKMARK [3][-]{subsubsection.2.1.1}{There will be twenty 1.5 hour lectures}{subsection.2.1}% 9
+\BOOKMARK [3][-]{subsubsection.2.1.2}{People learn more when they participate in class, especially when they ask questions}{subsection.2.1}% 10
+\BOOKMARK [3][-]{subsubsection.2.1.3}{The cases where}{subsection.2.1}% 11
+\BOOKMARK [3][-]{subsubsection.2.1.4}{form a set of measure zero.}{subsection.2.1}% 12
+\BOOKMARK [3][-]{subsubsection.2.1.5}{So ask questions. Probably the professor is the idiot for not explaining it properly, and your classmates will thank you for forcing a clarification.}{subsection.2.1}% 13
+\BOOKMARK [3][-]{subsubsection.2.1.6}{If you take the class pass/fail, you must attend the entire lecture for sixteen out of the twenty lectures to pass. \("Attend" means you are paying attention to the class, not swiping right on your phone.\)}{subsection.2.1}% 14
+\BOOKMARK [3][-]{subsubsection.2.1.7}{If you take the class for a grade, you do not have to attend the lectures. However the maximum you can get without attending at least sixteen lectures is A-.}{subsection.2.1}% 15
+\BOOKMARK [1][-]{section.3}{0.1 Components, cont'd \(1\)}{}% 16
+\BOOKMARK [2][-]{subsection.3.1}{0.1.2 Homework, 30\045.}{section.3}% 17
+\BOOKMARK [3][-]{subsubsection.3.1.1}{Homework assignments are at the end of each Thursday lecture except Lecture 10 and Lecture 20.}{subsection.3.1}% 18
+\BOOKMARK [3][-]{subsubsection.3.1.2}{Responses should be uploaded to Moodle before the beginning of the next Thursday class.}{subsection.3.1}% 19
+\BOOKMARK [3][-]{subsubsection.3.1.3}{Original electronic documents are preferred \(PDF, Word\) but if you need to, you can write on paper, scan to PDF or JPG; and upload.}{subsection.3.1}% 20
+\BOOKMARK [3][-]{subsubsection.3.1.4}{Since we may discuss the homework in class, no credit will be given for homework received after the start of the class where it is due. The two worst homeworks will be thrown out; the remaining ones will be averaged to form 30\045 of the grade.}{subsection.3.1}% 21
+\BOOKMARK [3][-]{subsubsection.3.1.5}{You may collaborate on homework with other members of this year's class, but you cannot collaborate with any other person, nor can you use materials or information provided by people who have taken the class in previous years. Other than that, you can use any resource you want while doing the homework.}{subsection.3.1}% 22
+\BOOKMARK [3][-]{subsubsection.3.1.6}{You get 10 additional homework points \(/100\) for each major error you discover in my lecture slides or Python code. I am the sole judge of what constitutes a major error, but for example if I say ``Tesla, Inc. is a company that operates coal mines,'' that's a major error. Eight previous years of students have pored over this material, so good luck. But I make a lot of changes each year, so that's a rich source of new errors = bonus homework points.}{subsection.3.1}% 23
+\BOOKMARK [1][-]{section.4}{0.1 Components, cont'd \(2\)}{}% 24
+\BOOKMARK [2][-]{subsection.4.1}{0.1.3 Midterm, 30\045.}{section.4}% 25
+\BOOKMARK [3][-]{subsubsection.4.1.1}{A midterm will be given after Lecture 10.}{subsection.4.1}% 26
+\BOOKMARK [3][-]{subsubsection.4.1.2}{The midterm is take-home and is due just before Lecture 12.}{subsection.4.1}% 27
+\BOOKMARK [3][-]{subsubsection.4.1.3}{You may NOT collaborate on the midterm \(or final\) with any other person, nor can you use materials or information provided by people who have taken the class in previous years. Other than that, you can use any resource you want while doing the midterm \(or final\).}{subsection.4.1}% 28
+\BOOKMARK [1][-]{section.5}{0.1.4 Final, 40\045.}{}% 29
+\BOOKMARK [2][-]{subsubsection.5.0.1}{A final will be given after Lecture 20. The final is also take-home and will cover the entire class including Lectures 1-10. If you are taking the class pass/fail, you must score at least 65\045 on the final.}{section.5}% 30
+\BOOKMARK [1][-]{section.6}{0.2 In summary, a grade will be formed from:}{}% 31
+\BOOKMARK [2][-]{subsection.6.1}{30\045 homework}{section.6}% 32
+\BOOKMARK [2][-]{subsection.6.2}{30\045 midterm}{section.6}% 33
+\BOOKMARK [2][-]{subsection.6.3}{40\045 final.}{section.6}% 34
+\BOOKMARK [1][-]{section.7}{If you are taking the class pass/fail, you will fail if you did not attend sixteen out of twenty lectures even if your score is otherwise passing. You will also fail if you do not get at least 65\045 on the final even if your score is otherwise passing.}{}% 35
+\BOOKMARK [1][-]{section.8}{I grade a little bit on a curve so if everyone is doing great the bar goes up and if everyone is doing badly the bar goes down. But generally consider the mapping}{}% 36
+\BOOKMARK [2][-]{subsection.8.1}{f\(9\)=A;}{section.8}% 37
+\BOOKMARK [2][-]{subsection.8.2}{f\(8\)=B;}{section.8}% 38
+\BOOKMARK [2][-]{subsection.8.3}{f\(7\)=C,}{section.8}% 39
+\BOOKMARK [2][-]{subsection.8.4}{f\(6\)=D.}{section.8}% 40
+\BOOKMARK [2][-]{subsection.8.5}{g\(x\)=+ if 10>x>6.667;}{section.8}% 41
+\BOOKMARK [2][-]{subsection.8.6}{g\(x\)=blank if 6.667>x>3.333; and}{section.8}% 42
+\BOOKMARK [2][-]{subsection.8.7}{g\(x\)=- if 3.333>x>0.}{section.8}% 43
+\BOOKMARK [1][-]{section.9}{Then your letter grade \(except for curve adjustments\) is f\([n/10]\) concatenated with g\(n mod 10\) where n is your numerical grade. Above 100 \(which several people have gotten\) is of course A+. Below 63.333 is probably failing although I might move it a bit depending on the rest of the class.}{}% 44
+\BOOKMARK [1][-]{section.10}{Use computers only for calculation. If you are taking an integral or a derivative, solve it yourself: don't just say ``Wolfram Alpha says the answer is\203'' And if you do use a computer for calculation, show enough intermediate steps to prove that you know how the theory works. I prefer well-commented Python code for assignments that require a computer.}{}% 45
+\BOOKMARK [1][-]{section.11}{0.3 About me; BEM 111 background}{}% 46
+\BOOKMARK [2][-]{subsection.11.1}{I grew up near Boston, Massachusetts. I went to Caltech and got a BS and MS in mathematics. I got a PhD in mathematics \(combinatorics\) from M.I.T.}{section.11}% 47
+\BOOKMARK [2][-]{subsection.11.2}{After getting my PhD, I briefly taught mathematics at Rutgers University. I then got a job as a portfolio manager for a small firm in New York City. I managed portfolios \(equity and derivatives\) using quantitative methods. We will talk about some of the theories I and others used in this class. Eventually I moved into risk management, which I found more interesting because it is less narrowly focused than portfolio management.}{section.11}% 48
+\BOOKMARK [2][-]{subsection.11.3}{I was the chief risk officer at Morgan Stanley Investment Management in New York, and also worked in ``sell side'' \(broker-dealer\) risk at Morgan Stanley. I came back to Pasadena in 2008 to work as the chief risk officer at Western Asset Management, which \(1\) manages about \044410 billion; and \(2\) is right down Colorado Blvd here in Pasadena.}{section.11}% 49
+\BOOKMARK [2][-]{subsection.11.4}{While I was at Morgan Stanley, I was an adjunct professor at the Courant Institute of Mathematical Sciences at New York University. I taught a class in Capital Markets and Portfolio Theory there; that class was a bit similar to BEM 104 at Caltech.}{section.11}% 50
+\BOOKMARK [2][-]{subsection.11.5}{Despite the fact that we are in the humanities \046 social sciences division, this is basically an applied mathematics class. Reasonably trained Caltech students who meet the prerequisites should be able to handle it, but it will definitely be more quantitative than qualitative. Today's class is by far the least quantitative, but it will give you the flavor of what we'll do.}{section.11}% 51
+\BOOKMARK [2][-]{subsection.11.6}{The math level should be accessible by junior/senior undergraduates and graduate students. For sophomores and frosh it probably gets increasingly hard to follow - although both of those class years have taken and passed the class. But there's probably more catch-up work if you're in an earlier class.}{section.11}% 52
+\BOOKMARK [2][-]{subsection.11.7}{Some people found handling the concepts challenging and others found them quite easy. Don't feel shy if you are challenged \205 just ask questions. No matter how smart you are, it's hard to keep up with live mathematical exposition: if I weren't the one giving the lecture, I would probably fall behind listening to it from time to time. So \(as I said previously!\) do everyone a favor and ask when you're getting behind.}{section.11}% 53
+\BOOKMARK [1][-]{section.12}{0.4 Outline of class}{}% 54
+\BOOKMARK [2][-]{subsection.12.1}{This class is about financial risk management, with a tilt toward ``buy side'' risk management.}{section.12}% 55
+\BOOKMARK [2][-]{subsection.12.2}{Prerequisites: a solid undergraduate mathematics education. Knowledge of calculus, probability and statistics. If you have taken one or more of BEM 105, Ma 112, or ACM/ESE 118, you probably have the right background.}{section.12}% 56
+\BOOKMARK [2][-]{subsection.12.3}{Lectures will be as follows:}{section.12}% 57
