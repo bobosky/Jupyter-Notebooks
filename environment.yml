@@ -1,0 +1,9 @@
+name: kjwbook-environment
+channels:
+  - defaults
+dependencies:
+  - numpy
+  - matplotlib
+  - scipy
+  - random
+  - ipywidgets
