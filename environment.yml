@@ -6,5 +6,4 @@ dependencies:
   - matplotlib
   - scipy
   - ipywidgets
-  - qrbook_funcs
   - pandas
