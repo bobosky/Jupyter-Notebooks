@@ -1,6 +1,6 @@
 This is the git for Ken Winston's _Quantitative Risk Management: Theory and Practice_ book in Jupyter Notebook form.
 
-Many thanks to Tom Kwong for technical assistance.
+Many thanks to Tom Kwong and Justin Bois for technical assistance.
 
 The chapters can be read, with live code execution, via Binder:
 
