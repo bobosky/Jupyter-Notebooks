@@ -3,14 +3,14 @@
 
 #Generate sample standard deviations over lookback periods
 def GenSampleSd(LogReturns,lookbacks):
-    import numpy
+    import numpy as np
     
     Sqrt12=12.0**0.5
     SampleSd=[]
     for lb in lookbacks:
         Sds=[]    #Save Lookback-length SD's in Sds
         for x in range(len(LogReturns)-lb):
-            StdDev=numpy.std(LogReturns[x:x+lb])
+            StdDev=np.std(LogReturns[x:x+lb])
             Sds.append(StdDev*Sqrt12)
         SampleSd.append(Sds)   #Add a row to SampleSd
     return(SampleSd)
@@ -183,7 +183,7 @@ def GetFREDMatrix(seriesnames,progress=False,startdate=None,enddate=None):
     #    ratematrix - list of time series, one time
     #                 series per exchange rate
     import pandas as pd
-    import numpy
+    import numpy as np
     import fredapi
     fred = fredapi.Fred(api_key='fd97b1fdb076ff1a86aff9b38d7a0e70')
 
@@ -263,6 +263,8 @@ def InterpolateCurve(tenors_in,curve_in):
 #Done with InterpolateCurve
 
 def StatsTable(xret):
+    import numpy as np
+    from scipy import stats
     #Create statistics table from x vector
     #giving periodic returns or log-returns
     #Returns a vector statnames giving the names
@@ -274,7 +276,7 @@ def StatsTable(xret):
                'Standard Deviation','Skewness',
                'Excess Kurtosis','Jarque-Bera',
                'Chi-Squared p','Serial Correlation',
-               '99% VaR','99% Expected Shortfall']
+               '99% VaR','99% cVaR']
     metrics=[]
     #Item count
     metrics.append(len(xret))
@@ -304,7 +306,7 @@ def StatsTable(xret):
     metrics.append(-np.mean([x for x in xret if x<=low1]))
     
     #Change numbers to text
-    table=['Statistic','Value']
+    table=[]
     for i in range(len(metrics)):
         rowlist=[]
         rowlist.append(statnames[i])
@@ -312,3 +314,77 @@ def StatsTable(xret):
         table.append(rowlist)
     return(statnames,metrics,table)
 #Done with StatsTable
+
+def Garch11Fit(initparams,InputData):
+    import scipy.optimize as scpo
+    import numpy as np
+    #Fit a GARCH(1,1) model to InputData using (8.42)
+    #Returns the triplet a,b,c (actually a1, b1, c) from (8.41)
+    #Initial guess is the triple in initparams
+
+    array_data=np.array(InputData)
+
+    def GarchMaxLike(params):
+        import numpy as np        
+        #Implement formula 6.42
+        xa,xb,xc=params
+        if xa>10: xa=10
+        if xb>10: xb=10
+        if xc>10: xc=10
+        #Use trick to force a and b between 0 and .999;
+        #(a+b) less than .999; and c>0
+        a=.999*np.exp(xa)/(1+np.exp(xa))
+        b=(.999-a)*np.exp(xb)/(1+np.exp(xb))
+        c=np.exp(xc)
+        t=len(array_data)
+        minimal=10**(-20)
+        vargarch=np.zeros(t)
+
+        #CHEATS!
+        #Seed the variance with the whole-period variance
+        #In practice we would have to have a holdout sample
+        #at the beginning and roll the estimate forward.
+        vargarch[0]=np.var(array_data)
+
+        #Another cheat: take the mean over the whole period
+        #and center the series on that. Hopefully the mean
+        #is close to zero. Again in practice to avoid lookahead
+        #we would have to roll the mean forward, using only
+        #past data.
+        overallmean=np.mean(array_data)
+        #Compute GARCH(1,1) var's from data given parameters
+        for i in range(1,t):
+            #Note offset - i-1 observation of data
+            #is used for i estimate of variance
+            vargarch[i]=c+b*vargarch[i-1]+\
+            a*(array_data[i-1]-overallmean)**2
+            if vargarch[i]<=0:
+                vargarch[i]=minimal
+                
+        #sum logs of variances
+        logsum=np.sum(np.log(vargarch))
+        #sum yi^2/sigma^2
+        othersum=0
+        for i in range(t):
+            othersum+=((array_data[i]-overallmean)**2)/vargarch[i]
+        #Actually -2 times (6.42) since we are minimizing
+        return(logsum+othersum)
+    #End of GarchMaxLike
+
+    #Transform parameters to the form used in GarchMaxLike
+    #This ensures parameters are in bounds 0<a,b<1, 0<c
+    aparam=np.log(initparams[0]/(.999-initparams[0]))
+    bparam=np.log(initparams[1]/(.999-initparams[0]-initparams[1]))
+    cparam=np.log(initparams[2])
+    xinit=[aparam,bparam,cparam]
+    #Run the minimization. Constraints are built-in.
+    results = scpo.minimize(GarchMaxLike,
+                            xinit,
+                            method='CG')
+    aparam,bparam,cparam=results.x
+    a=.999*np.exp(aparam)/(1+np.exp(aparam))
+    b=(.999-a)*np.exp(bparam)/(1+np.exp(bparam))
+    c=np.exp(cparam)
+
+    return([a,b,c])
+#Done with Garch11Fit function
