@@ -37,21 +37,32 @@ def PlotSampleSd(Title,Date,SampleSd,lookbacks,colors):
 #Done with PlotSampleSd
 
 #get Fama French 3 factor data from French's website
-def getFamaFrench3():
+def getFamaFrench3(enddate=None):
+    #enddate in integer yyyymm format if given    
     import pandas as pd
     
     ffurl='http://mba.tuck.dartmouth.edu/pages/faculty/ken.french/ftp/F-F_Research_Data_Factors_CSV.zip'
 
     #Read just the first line of the FF file into a dataframe
     df_monthly = pd.read_csv(ffurl, header=None, nrows=1)
+
     #Put the line into a string
     str=df_monthly.iloc[0,0]
+
     #8th word in the string is the last date in the file in YYYYMM format
     lastyear=int(str.split()[8][:4])
     lastmonth=int(str.split()[8][4:])
     #first date in the file is June 1926 - figure out
     #number of months based on that
     periods=(lastyear-1926)*12+(lastmonth-6)    
+    
+    #Use specified end date?
+    if enddate:
+        ed_year = int(enddate/100)
+        ed_month = enddate%100
+        ed_periods = (ed_year-1926)*12+(ed_month-6)
+        if (ed_periods > 0) & (ed_periods < periods):    #Use specified end date
+            periods = ed_periods
     
     #Now we know how many periods to read - skip the header and read those monthly periods
     names_monthly = ["yearmon", "mkt_minus_rf", "SMB", "HML", "RF"]
