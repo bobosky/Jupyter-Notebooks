@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
-#Function library for Financial Risk Management book
+#Function library for Financial Risk and Portfolio Management book
+#Copyright (c) 2019 Kenneth Winston
 
 #Generate sample standard deviations over lookback periods
 def GenSampleSd(LogReturns,lookbacks):
@@ -143,23 +144,26 @@ def formula3p9(c,r,t):
         ytttterm+=2
         ytttterm*=c*(y/(1-y))**3
     convexity+=ytttterm
-    #formula3p3 is also in frmbook_funcs.py
+    #formula3p3 is also in qrbook_funcs.py
     price=formula3p3(c,r,t)   #Rescale by price
     convexity/=price
     return(convexity)
 #Done with Formula3p9
 
-def LastYearEnd():
+def LastYearEnd(yearof=None):
     #return YYYY-MM-DD date string
     #that is the last business day
-    #of the year before the current date.
+    #of yearof. If no yearof, uses
+    #the year before the current date.
     #If the last calendar
     #day is on a weekend, assumes the last
     #Friday is the last business day
     import datetime as dt
-    t=dt.date.today()
+    if not yearof:
+        t=dt.date.today()
+        yearof=t.year-1
     for day in [31,30,29,28]:
-        l=dt.date(t.year-1,12,day)
+        l=dt.date(yearof,12,day)
         if l.weekday()<5:
             return(str(l.year)+'-12-'+str(day))
 #Done with LastYearEnd
