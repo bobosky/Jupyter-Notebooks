@@ -1,6 +1,6 @@
 This is the git for Ken Winston's _Quantitative Risk and Portfolio Management: Theory and Practice_ book in Jupyter Notebook form.
 
-All text and code is Copyright (C) 2019 Kenneth Winston. All rights reserved.
+All text and code is Copyright (C) 2020 Kenneth Winston. All rights reserved.
 
 Many thanks to Tom Kwong and Justin Bois for technical assistance.
 
