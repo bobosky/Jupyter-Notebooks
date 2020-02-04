@@ -8,4 +8,3 @@ dependencies:
   - ipywidgets
   - pandas
   - qrpm_funcs
-  - https://github.com/mortada/fredapi
