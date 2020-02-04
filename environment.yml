@@ -7,4 +7,3 @@ dependencies:
   - scipy
   - ipywidgets
   - pandas
-  - qrpm_funcs.py
