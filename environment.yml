@@ -7,3 +7,5 @@ dependencies:
   - scipy
   - ipywidgets
   - pandas
+  - fredapi
+
