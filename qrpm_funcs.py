@@ -1,19 +1,14 @@
 # -*- coding: utf-8 -*-
 #Function library for Quantitative Risk and Portfolio Management book
-#Copyright (c) 2019 Kenneth Winston
+#Copyright (c) 2020 Kenneth Winston
 
-#Generate sample standard deviations over lookback periods
+#Generate sample standard deviations over lookback months
 def GenSampleSd(LogReturns,lookbacks):
     import numpy as np
-    
     Sqrt12=12.0**0.5
-    SampleSd=[]
-    for lb in lookbacks:
-        Sds=[]    #Save Lookback-length SD's in Sds
-        for x in range(len(LogReturns)-lb):
-            StdDev=np.std(LogReturns[x:x+lb])
-            Sds.append(StdDev*Sqrt12)
-        SampleSd.append(Sds)   #Add a row to SampleSd
+    SampleSd=[[np.std(LogReturns[x:x+lb])*Sqrt12 \
+            for x in range(len(LogReturns)-lb)] \
+            for lb in lookbacks]
     return(SampleSd)
 #Done with GetSampleSd
 
@@ -21,14 +16,12 @@ def GenSampleSd(LogReturns,lookbacks):
 def PlotSampleSd(Title,Date,SampleSd,lookbacks,colors):
     import matplotlib.pyplot as plt
     
-    fig, ax = plt.subplots()
     for i, lb in enumerate(lookbacks):
-        ax.plot(Date[lb:], SampleSd[i], colors[i],\
+        plt.plot(Date[lb:], SampleSd[i], colors[i],\
                 label=str(lb)+' month')
-    for label in ax.xaxis.get_ticklabels():
-        label.set_rotation(45)
-    legend = ax.legend(loc='upper right', shadow=False, fontsize='medium')
-    ax.grid()
+    plt.xticks(rotation=45)
+    plt.legend(loc='upper right', shadow=False, fontsize='medium')
+    plt.grid()
 
     plt.title(Title)
     plt.ylabel('Sample SDs')
@@ -83,12 +76,7 @@ def getFamaFrench3(enddate=None):
 #Also add back a risk-free rate
 def LogReturnConvert(Ret100,RF):
     import math
-    
-    LogReturns=[]
-    for x in range(len(Ret100)):
-        LogReturns.append(100.0*math.log(1+\
-        (Ret100[x]+RF[x])/100.))  
-    return(LogReturns)
+    return( [100.0*math.log(1+(r1+rf)/100.) for (r1,rf) in zip(Ret100,RF)] )
 #Done with LogReturnConvert
 
 def formula3p3(c,r,t):
@@ -121,7 +109,7 @@ def formula3p8(c,r,t):
     else:
         multiplier=(1-ytothet-t*(1-y)*ytothet)/(1-y)**2
     duration+=multiplier*c*y
-    #formula3p3 is also in qrbook_funcs.py
+    #formula3p3 is also in qrpm_funcs.py
     price=formula3p3(c,r,t)   #Rescale by price
     duration/=price
     return(duration)
@@ -144,7 +132,7 @@ def formula3p9(c,r,t):
         ytttterm+=2
         ytttterm*=c*(y/(1-y))**3
     convexity+=ytttterm
-    #formula3p3 is also in qrbook_funcs.py
+    #formula3p3 is also in qrpm_funcs.py
     price=formula3p3(c,r,t)   #Rescale by price
     convexity/=price
     return(convexity)
@@ -160,8 +148,7 @@ def LastYearEnd(yearof=None):
     #Friday is the last business day
     import datetime as dt
     if not yearof:
-        t=dt.date.today()
-        yearof=t.year-1
+        yearof=dt.date.today().year-1
     for day in [31,30,29,28]:
         l=dt.date(yearof,12,day)
         if l.weekday()<5:
@@ -220,10 +207,7 @@ def GetFREDMatrix(seriesnames,progress=False,startdate=None,enddate=None):
     #The dataframe has aligned the dates
     #strip out date series
     cdates=df.index.strftime('%Y-%m-%d').tolist()
-    ratematrix=[]
-    for i in range(len(df)):
-        x=list(df.iloc[i])
-        ratematrix.append(x)
+    ratematrix=[list(df.iloc[i]) for i in range(len(df))]
     return(cdates,ratematrix)
 #Done with GetFREDMatrix
 
@@ -276,6 +260,45 @@ def InterpolateCurve(tenors_in,curve_in):
         
     return(tenors_out,curve_out,shortrates)
 #Done with InterpolateCurve
+
+def levels_to_log_returns(cdates,ratematrix,multipliers):
+    import pandas as pd
+    import numpy as np
+    #Convert levels to log-returns
+    #First take logs of the currency levels
+    #Currency exchange rates are usually expressed in the direction
+    #that will make the rate > 1
+    #Swissie and yen are in currency/dollar, but
+    #pounds is in dollar/currency. Reverse signs
+    #so everything is in dollar/currency
+
+    #Do each currency separately to account for separate missing data patterns
+    #dlgs is a list of lists of length 3 corresponding to the 3 currencies
+    #The value in dlgs is nan if there is missing data for the present or
+    #previous day's observation; otherwise it is the log of today/yesterday
+    dlgs=[]
+    for i in range(len(multipliers)):
+        lgrates=[]
+        previous=-1
+        for t in range(len(ratematrix)):
+            if pd.isna(ratematrix[t][i]) or ratematrix[t][i]<=0:
+                lgrates.append(np.nan)    #Append a nan
+            else:
+                if previous < 0:    #This is the first data point
+                    lgrates.append(np.nan)
+                else:
+                    lgrates.append(np.log(ratematrix[t][i]/previous)*multipliers[i])
+                previous=ratematrix[t][i]
+        dlgs.append(lgrates)
+
+    #dlgs is the transpose of what we want - flip it
+    dlgs=np.transpose(dlgs)
+
+    #Delete any time periods that don't have data
+    difflgs=[dl for dl in dlgs if all(pd.notna(dl))]
+    lgdates=[cdates[t] for t,dl in enumerate(dlgs) if all(pd.notna(dl))]
+    return(lgdates,difflgs)
+#Done with levels_to_log_returns
 
 def StatsTable(xret):
     import numpy as np
