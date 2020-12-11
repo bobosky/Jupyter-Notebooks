@@ -356,15 +356,15 @@ def StatsTable(xret):
 def Garch11Fit(initparams,InputData):
     import scipy.optimize as scpo
     import numpy as np
-    #Fit a GARCH(1,1) model to InputData using (8.42)
-    #Returns the triplet a,b,c (actually a1, b1, c) from (8.41)
+    #Fit a GARCH(1,1) model to InputData using (8.58)
+    #Returns the triplet a,b,c (actually a1, b1, c) from (8.57)
     #Initial guess is the triple in initparams
 
     array_data=np.array(InputData)
 
     def GarchMaxLike(params):
         import numpy as np        
-        #Implement formula 6.42
+        #Implement maximum likelihood formula Chapter 8
         xa,xb,xc=params
         if xa>10: xa=10
         if xb>10: xb=10
@@ -405,7 +405,7 @@ def Garch11Fit(initparams,InputData):
         othersum=0
         for i in range(t):
             othersum+=((array_data[i]-overallmean)**2)/vargarch[i]
-        #Actually -2 times (6.42) since we are minimizing
+        #Actually -2 times objective since we are minimizing
         return(logsum+othersum)
     #End of GarchMaxLike
 
