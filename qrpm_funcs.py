@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #Function library for Quantitative Risk and Portfolio Management book
-#Copyright (c) 2020 Kenneth Winston
+#Copyright (c) 2022 Kenneth Winston
 
 #Generate sample standard deviations over lookback months
 def GenSampleSd(LogReturns,lookbacks):
